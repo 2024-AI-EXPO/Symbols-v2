@@ -7,7 +7,7 @@ actions = ["안녕하세요", "감사합니다", "미안합니다", "싫어합�
            "아프다", "졸리다", "마음", "사람", "생각",
            "친구", "학교", "경찰", "쌀밥", "침대"]
 seq_length = 5
-model = load_model('./models/test_LSTM.keras')
+model = load_model('../models/test_LSTM.keras')
 
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils

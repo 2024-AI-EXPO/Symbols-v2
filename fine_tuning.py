@@ -1,11 +1,12 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
 from keras import layers
 from keras import Sequential
 from keras.api.layers import Dense
-from keras.src.saving import load_model
-from sklearn.model_selection import train_test_split
+from keras.api.optimizers import Adam
 from keras.api.callbacks import ModelCheckpoint, ReduceLROnPlateau
-import numpy as np
-import matplotlib.pyplot as plt
+from keras.src.saving import load_model
 
 # 추가 데이터
 actions = ["hello", "thanks", "sorry", "hate", "hungry",
@@ -33,7 +34,7 @@ for layer in model.layers:
 
 model.build(input_shape=pre_model.inputs[0].shape)
 
-model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+model.compile(optimizer=Adam(learning_rate=0.001), loss="sparse_categorical_crossentropy", metrics=["accuracy"])
 model.summary()
 
 # fine_tuning
