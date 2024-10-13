@@ -21,6 +21,7 @@ def dataset(args):
     if args.create == "video":
         setting = args.file
         file_name = args.file.split(".")[0]
+        file_name = file_name.split("/")[-1]
     elif args.create == "live":
         setting = 0
         file_name = args.label
@@ -96,13 +97,13 @@ def dataset(args):
     data = np.array(data)
     seq_data = np.array([data[seq:seq+seq_len] for seq in range(len(data) - seq_len)])
     print(file_name, seq_data.shape)
-    np.save(os.path.join(args.directory, f"{file_name}"), seq_data)
+    np.save(os.path.join(args.save, f"{file_name}"), seq_data)
 
 
 def main():
     parser = argparse.ArgumentParser(description="You can select options for How to make dataset")
     parser.add_argument("-c", "--create", type=str, required=True, help="데이터셋을 영상(video)으로 만들 것인지 실시간(live)으로 만들 것인지 설정하세요 (기본 : 실시간)")
-    parser.add_argument("-d", "--directory", type=str, required=True, help="데이터셋을 어디에 저장할 지 설정하세요")
+    parser.add_argument("-s", "--save", type=str, required=True, help="데이터셋을 어디에 저장할 지 설정하세요")
     parser.add_argument("-f", "--file", type=str, help="영상으로 데이터셋을 만들 경우 영상 경로를 설정하세요 (파일 이름으로 label) 설정")
     parser.add_argument("-l", "--label", type=str, help="실시간으로 데이터셋을 만들 경우 label을 설정하세요")
 

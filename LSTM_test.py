@@ -5,6 +5,8 @@ from sklearn.model_selection import train_test_split
 from keras.api.callbacks import ModelCheckpoint, ReduceLROnPlateau
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 actions = ["hello", "thanks", "sorry", "hate", "hungry",
            "sick", "tired", "mind", "person", "think"]
@@ -40,7 +42,7 @@ history = model.fit(
     epochs=100,
     batch_size=32,
     callbacks=[
-        ModelCheckpoint("models/test_LSTM.keras", verbose=2, save_best_only=True, mode="auto"),
+        ModelCheckpoint("models/test_LSTM_GPU.keras", verbose=2, save_best_only=True, mode="auto"),
         ReduceLROnPlateau(factor=0.5, patience=50, verbose=2, mode="auto")
     ]
 )
